@@ -80,12 +80,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_share:
                         fab.hide();
-                        handleSelection("Don't you think you've shared enough?");
+                        handleSelection(R.string.nav_share_message);
                         fab.show();
                         break;
                     case R.id.nav_send:
                         fab.hide();
-                        handleSelection("Message Sent");
+                        handleSelection(R.string.nav_send_message);
                         fab.show();
                         break;
                     default:
@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
     private void initializeDisplayContent() {
         mRecyclerItems = findViewById(R.id.list_items);
         mNotesLayoutManager = new LinearLayoutManager(this);
-        mCoursesLayoutManager = new GridLayoutManager(this, 2);
+        mCoursesLayoutManager = new GridLayoutManager(this,
+                getResources().getInteger(R.integer.course_grid_span));
 
         List<NoteInfo> notes = DataManager.getInstance().getNotes();
         mNoteRecyclerAdapter = new NoteRecyclerAdapter(this, notes);
@@ -138,9 +139,9 @@ public class MainActivity extends AppCompatActivity {
         menu.findItem(id).setChecked(true);
     }
 
-    private void handleSelection(String message) {
+    private void handleSelection(int message_id) {
 //        View view = findViewById(R.id.list_notes);
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), message_id, Toast.LENGTH_SHORT).show();
     }
 
     @Override
